@@ -103,7 +103,10 @@ class MainPageState extends State<MainPageWidget> {
     //初始化数据
     initData();
     return Scaffold(
-      body: _pageList[_tabIndex] ,
+      body: IndexedStack(
+        index: _tabIndex,
+        children: _pageList,
+      ) ,
       bottomNavigationBar: new MyBottomNavigationBar(
         items: <BottomNavigationBarItem>[
           new BottomNavigationBarItem(

@@ -23,7 +23,7 @@ class HomePage extends StatefulWidget {
   }
 }
 
-class HomePageIndex extends State<HomePage> {
+class HomePageIndex extends State<HomePage> with AutomaticKeepAliveClientMixin {
   var _items;
   ScreenUtils screenUtil = new ScreenUtils();
   final List<HomeTabList> myTabs = <HomeTabList>[
@@ -53,7 +53,7 @@ class HomePageIndex extends State<HomePage> {
               _widget_menu_card(contexts),
               SliverOverlapAbsorber(
                 handle:
-                NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+                    NestedScrollView.sliverOverlapAbsorberHandleFor(context),
                 child: SliverAppBar(
                   backgroundColor: Colors.white,
                   floating: false,
@@ -64,9 +64,11 @@ class HomePageIndex extends State<HomePage> {
                     indicatorColor: Color(0xff4ddfa9),
                     indicatorSize: TabBarIndicatorSize.label,
                     unselectedLabelStyle: new TextStyle(
-                        fontSize:screenUtil.setFontSize(17), fontWeight: FontWeight.bold),
+                        fontSize: screenUtil.setFontSize(17),
+                        fontWeight: FontWeight.bold),
                     labelStyle: new TextStyle(
-                        fontSize: screenUtil.setFontSize(24), fontWeight: FontWeight.bold),
+                        fontSize: screenUtil.setFontSize(24),
+                        fontWeight: FontWeight.bold),
                     labelColor: Colors.black,
                     unselectedLabelColor: Color(0xff707070),
                     indicatorWeight: screenUtil.setFontSize(5),
@@ -103,9 +105,9 @@ class HomePageIndex extends State<HomePage> {
       child: _items == null
           ? CupertinoActivityIndicator()
           : new ListView.builder(
-          itemCount: _items.length,
-          itemBuilder: homeTitleItemView,
-          scrollDirection: Axis.horizontal),
+              itemCount: _items.length,
+              itemBuilder: homeTitleItemView,
+              scrollDirection: Axis.horizontal),
     );
   }
 
@@ -139,7 +141,8 @@ class HomePageIndex extends State<HomePage> {
               ),
               decoration: new BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(screenUtil.setWidgetHeight(40))),
+                borderRadius: BorderRadius.all(
+                    Radius.circular(screenUtil.setWidgetHeight(40))),
                 border: new Border.all(width: 4, color: Color(0xff4ddfa9)),
               ),
             ),
@@ -157,24 +160,18 @@ class HomePageIndex extends State<HomePage> {
       margin: EdgeInsets.all(10),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }
 
-void _onListItemTap(BuildContext context,
-    int index,) {
+void _onListItemTap(
+  BuildContext context,
+  int index,
+) {
   if (index == 0) {
     Navigator.push(context, CustomRouteSlide(UserTopicPage()));
-//    Navigator.push<String>(
-//        context,
-//        new PageRouteBuilder(pageBuilder: (BuildContext context,
-//            Animation<double> animation, Animation<double> secondaryAnimation) {
-//          // 跳转的路由对象
-//          return new UserTopicPage();
-//        }, transitionsBuilder: (BuildContext context,
-//            Animation<double> animation,
-//            Animation<double> secondaryAnimation,
-//            Widget child,) {
-//          return CustomRouteSlide.createTransition(animation, child);
-//        }));
   }
 }
 
@@ -186,8 +183,8 @@ class SliverTabBarDelegate extends SliverPersistentHeaderDelegate {
       : assert(widget != null);
 
   @override
-  Widget build(BuildContext context, double shrinkOffset,
-      bool overlapsContent) {
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
     return new Container(
       child: widget,
       color: color,

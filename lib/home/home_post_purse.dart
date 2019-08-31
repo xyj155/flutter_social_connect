@@ -28,7 +28,7 @@ class HomePostPurse extends StatefulWidget {
   _HomePostPurseState createState() => new _HomePostPurseState();
 }
 
-class _HomePostPurseState extends State<HomePostPurse> {
+class _HomePostPurseState extends State<HomePostPurse> with AutomaticKeepAliveClientMixin {
   int _count = 20;
   ScreenUtils screenUtil = new ScreenUtils();
   IjkMediaController controller;
@@ -307,4 +307,8 @@ class _HomePostPurseState extends State<HomePostPurse> {
     controller?.dispose();
     super.dispose();
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }
