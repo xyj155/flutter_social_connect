@@ -39,7 +39,17 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        manifestPlaceholders = [TENCENT_APP_ID: "1109831276"]
+
+        ndk {
+            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a','x86'
+        }
+
+        manifestPlaceholders = [
+                TENCENT_APP_ID: "1109831276",
+                JPUSH_PKGNAME : applicationId,
+                JPUSH_APPKEY : "a96bfaaaaa323f4e0e137fb0", //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+        ]
     }
 
     buildTypes {

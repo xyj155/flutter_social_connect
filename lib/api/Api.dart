@@ -1,6 +1,7 @@
 class Api {
 
   static final String HOME_TITLE_AVATAR = "Home/queryHomeActiveName";
+  static final String SQUARE_PURSE_USER = "User/queryPurseUser";
   static final String USER_TOPIC_LIST = "Topic/queryUserTopicById";
   static final String QUERY_POST_LIST = "Post/queryUserPostByPage";
   static final String QUERY_POST_BY_POSTID = "Post/queryPostByPid";

@@ -45,7 +45,10 @@ dependencies:
     git:
       url: https://github.com/v7lin/fake_tencent.git
   fluwx: ^1.0.4
-
+  jmessage_flutter: 0.2.0
+  flutter_marquee:
+    git: https://github.com/LiuC520/flutter_marquee.git
+  ripple_backdrop_animate_route: ^0.1.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -67,6 +70,7 @@ flutter:
     - assert/imgs/tabbar_project_normal.png
     - assert/flare/Space.flr
     - assert/json/country_code_json.json
+    - assert/imgs/square_news.png
     - assert/imgs/tabbar_project_selected.png
     - assert/imgs/tabbar_home_normal.png
     - assert/imgs/message_like.png
@@ -80,6 +84,11 @@ flutter:
     - assert/imgs/loading.gif
     - assert/imgs/login_arrow_rightx.png
     - assert/imgs/closex.png
+    - assert/imgs/school_part_time.png
+    - assert/imgs/school_active.png
+    - assert/imgs/school_shop.png
+    - assert/imgs/school_purse.png
+    - assert/imgs/person_arrow_downx.png
     - assert/imgs/login_qq.png
     - assert/imgs/login_wechat.png
     - assert/imgs/message_reply_arrow_right.png
@@ -114,3 +123,6 @@ flutter:
     - assert/imgs/person_commentx.png
     - assert/imgs/arrow_down_refund.png
     - assert/imgs/icon_image_delete.png
+    - assert/imgs/ic_square_picture.png
+    - assert/imgs/ic_square_video.png
+    - assert/imgs/ic_square_write.png

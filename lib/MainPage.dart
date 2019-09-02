@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/generated/i18n.dart';
+import 'package:like_this/util/ScreenUtils.dart';
 import 'package:like_this/widget/my_bottom_navigationbar.dart';
+import 'package:ripple_backdrop_animate_route/ripple_backdrop_animate_route.dart';
 import 'home/home_index.dart';
 import 'message/message_index.dart';
 import 'square/square_index.dart';
@@ -62,7 +65,6 @@ class MainPageState extends State<MainPageWidget> {
   }
 
   void initData() {
-
     tabImages = [
       [
         getTabImage('assert/imgs/tapbar_home_selected.png'),
@@ -76,7 +78,6 @@ class MainPageState extends State<MainPageWidget> {
         getTabImage('assert/imgs/ic_main_tab_attention.png'),
         getTabImage('assert/imgs/ic_main_tab_attention_pressed.png')
       ],
-
       [
         getTabImage('assert/imgs/tabbar_message_normal.png'),
         getTabImage('assert/imgs/tabbar_message_selected.png')
@@ -106,7 +107,7 @@ class MainPageState extends State<MainPageWidget> {
       body: IndexedStack(
         index: _tabIndex,
         children: _pageList,
-      ) ,
+      ),
       bottomNavigationBar: new MyBottomNavigationBar(
         items: <BottomNavigationBarItem>[
           new BottomNavigationBarItem(
@@ -115,29 +116,31 @@ class MainPageState extends State<MainPageWidget> {
               icon: getTabIcon(1), title: getTabTitle(1)),
           new BottomNavigationBarItem(
               icon: new Icon(Icons.add),
-              title: Text('发布',style: new TextStyle(color: Color(0xff515151)),)),
+              title: Text(
+                '发布',
+                style: new TextStyle(color: Color(0xff515151)),
+              )),
           new BottomNavigationBarItem(
               icon: getTabIcon(3), title: getTabTitle(3)),
           new BottomNavigationBarItem(
               icon: getTabIcon(4), title: getTabTitle(4)),
         ],
 
-
         //默认选中首页
         currentIndex: _tabIndex,
         iconSize: 24.0,
         //点击事件
         onTap: (index) {
-          if(index==2){// tab添加被点击
+          if (index == 2) {
+            // tab添加被点击
 
             return;
-          }else{
+          } else {
             setState(() {
 //            print(index);
-              _tabIndex= index;
+              _tabIndex = index;
             });
           }
-
         },
       ),
       floatingActionButton: FloatingActionButtonDemo(),
@@ -152,11 +155,14 @@ class MainPageState extends State<MainPageWidget> {
   }
 }
 
+ScreenUtils screenUtils = new ScreenUtils();
+
 class FloatingActionButtonDemo extends StatelessWidget {
   const FloatingActionButtonDemo({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    screenUtils.initUtil(context);
     return Container(
       padding: EdgeInsets.all(5),
       height: 62,
@@ -173,7 +179,59 @@ class FloatingActionButtonDemo extends StatelessWidget {
           color: Colors.white,
           size: 30,
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(TransparentRoute(
+            builder: (context) => RippleBackdropAnimatePage(
+              child: new Container(
+                padding: EdgeInsets.all(screenUtils.setWidgetHeight(15)),
+                alignment: Alignment.bottomCenter,
+                child: new Container(
+                  height: screenUtils.setWidgetHeight(110),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      new Expanded(child: new Column(
+                        children: <Widget>[
+                          new Image.asset(
+                            "assert/imgs/ic_square_write.png",
+                            height: screenUtils.setWidgetHeight(80),
+                            width: screenUtils.setWidgetHeight(67),
+                          ),
+                          new Text("文字说说")
+                        ],
+                      )),
+                      new Expanded(child: new Column(
+                        children: <Widget>[
+                          new Image.asset(
+                            "assert/imgs/ic_square_picture.png",
+                            height: screenUtils.setWidgetHeight(80),
+                            width: screenUtils.setWidgetHeight(67),
+                          ),
+                          new Text("图片签到")
+                        ],
+                      )),
+                      new Expanded(child: new Column(
+                        children: <Widget>[
+                          new Image.asset(
+                            "assert/imgs/ic_square_video.png",
+                            height: screenUtils.setWidgetHeight(80),
+                            width: screenUtils.setWidgetHeight(67),
+                          ),
+                          new Text("视频帖子")
+                        ],
+                      )),
+                    ],
+                  ),
+                ),
+              ),
+              childFade: true,
+              duration: 300,
+              blurRadius: 20.0,
+              bottomHeight: 60.0,
+              bottomButtonRotate: true,
+            ),
+          ));
+        },
       ),
     );
   }

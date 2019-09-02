@@ -243,6 +243,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.3"
+  flutter_marquee:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "918e202a54c775b51dc7eb1987b515a36f39a327"
+      url: "https://github.com/LiuC520/flutter_marquee.git"
+    source: git
+    version: "0.0.1"
   flutter_page_indicator:
     dependency: transitive
     description:
@@ -355,6 +364,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.12"
+  jmessage_flutter:
+    dependency: "direct main"
+    description:
+      name: jmessage_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
   js:
     dependency: transitive
     description:
@@ -453,6 +469,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.2"
+  platform:
+    dependency: transitive
+    description:
+      name: platform
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.2.1"
   pool:
     dependency: transitive
     description:
@@ -481,6 +504,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.3"
+  ripple_backdrop_animate_route:
+    dependency: "direct main"
+    description:
+      name: ripple_backdrop_animate_route
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.2"
   shelf:
     dependency: transitive
     description:
