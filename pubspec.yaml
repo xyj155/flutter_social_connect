@@ -14,7 +14,7 @@ description: A new Flutter application.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -45,7 +45,8 @@ dependencies:
     git:
       url: https://github.com/v7lin/fake_tencent.git
   fluwx: ^1.0.4
-  jmessage_flutter: 0.2.0
+  jmessage_flutter: ^0.2.0
+  jpush_flutter: ^0.0.8
   flutter_marquee:
     git: https://github.com/LiuC520/flutter_marquee.git
   ripple_backdrop_animate_route: ^0.1.2
@@ -68,6 +69,8 @@ flutter:
 
   assets:
     - assert/imgs/tabbar_project_normal.png
+    - assert/imgs/manx.png
+    - assert/imgs/womanx.png
     - assert/flare/Space.flr
     - assert/json/country_code_json.json
     - assert/imgs/square_news.png
@@ -126,3 +129,4 @@ flutter:
     - assert/imgs/ic_square_picture.png
     - assert/imgs/ic_square_video.png
     - assert/imgs/ic_square_write.png
+    - assert/imgs/ic_user_game.png

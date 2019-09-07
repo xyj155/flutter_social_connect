@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_picker/flutter_picker.dart';
 import 'package:like_this/login/third_social_login.dart';
+import 'package:like_this/login/user_register_owner_information.dart';
 
 import 'package:like_this/util/ScreenUtils.dart';
 import 'package:like_this/util/TransationUtil.dart';
@@ -94,7 +95,7 @@ class LoginState extends State<LoginPage> {
 
   List<PickerItem> list = new List();
 
-  // ignore: non_constant_identifier_names
+  String telPhone = '';
   List<String> countryList = new List();
 
   void loadJson() {
@@ -111,9 +112,7 @@ class LoginState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-//    print("=============");
-//    print(jsonEncode);
-//    print("=============");
+
     screenUtil.initUtil(context);
     return new Stack(
       children: <Widget>[
@@ -203,7 +202,7 @@ class LoginState extends State<LoginPage> {
                         fontSize: screenUtil.setFontSize(15)),
                     inputBorder: InputBorder.none,
                     fieldCallBack: (content) {
-//                _phoneNumber = content;
+                      telPhone = content;
 //                print(_phoneNumber);
                     }),
               ),
@@ -270,7 +269,12 @@ class LoginState extends State<LoginPage> {
                     '登陆',
                     style: new TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        new CustomRouteSlide(new UserRegisterInformationPage()),
+                            (route) => route == null);
+                  },
                 ),
               ),
               new Container(
@@ -323,7 +327,7 @@ class LoginState extends State<LoginPage> {
                   ),
                   onTap: () {
                     Navigator.push(
-                        context, CustomRouteZoom(ThirdSocialLoginPage()));
+                        context, CustomRouteSlide(ThirdSocialLoginPage()));
                   },
                 )),
               )
@@ -342,15 +346,19 @@ class LoginState extends State<LoginPage> {
               top: screenUtil.setWidgetHeight(70),
               right: screenUtil.setWidgetWidth(20)),
           height: screenUtil.setWidgetHeight(38),
-          child: GestureDetector(child:new Image.asset(
-            "assert/imgs/closex.png",
-            width: screenUtil.setWidgetWidth(20),
-            height: screenUtil.setWidgetHeight(20),
-          ) ,onTap: (){
-            Navigator.pushAndRemoveUntil(context,
-                new CustomRouteZoom(new ThirdSocialLoginPage()), (route) => route == null
-            );
-          },),
+          child: GestureDetector(
+            child: new Image.asset(
+              "assert/imgs/closex.png",
+              width: screenUtil.setWidgetWidth(20),
+              height: screenUtil.setWidgetHeight(20),
+            ),
+            onTap: () {
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  new CustomRouteSlide(new ThirdSocialLoginPage()),
+                  (route) => route == null);
+            },
+          ),
         )
       ],
     );

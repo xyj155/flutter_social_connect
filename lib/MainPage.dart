@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/generated/i18n.dart';
+
 import 'package:like_this/util/ScreenUtils.dart';
 import 'package:like_this/widget/my_bottom_navigationbar.dart';
 import 'package:ripple_backdrop_animate_route/ripple_backdrop_animate_route.dart';

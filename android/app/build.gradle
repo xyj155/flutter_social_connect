@@ -41,7 +41,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         ndk {
-            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a','x86'
+            abiFilters "armeabi-v7a", "x86"
         }
 
         manifestPlaceholders = [
@@ -53,10 +53,16 @@ android {
     }
 
     buildTypes {
+        debug {
+            ndk {
+                abiFilters "armeabi-v7a", "x86"
+            }
+        }
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
+            ndk {
+                abiFilters "armeabi-v7a"
+            }
         }
     }
 }

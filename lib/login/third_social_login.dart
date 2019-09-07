@@ -193,7 +193,7 @@ class ThirdSocialLoginState extends State<ThirdSocialLoginPage> {
                   ),
                   onTap: () {
                     Navigator.pushAndRemoveUntil(context,
-                        new CustomRouteZoom(new LoginPage()), (route) => route == null
+                        new CustomRouteSlide(new LoginPage()), (route) => route == null
                     );
                   },
                 )),
@@ -219,7 +219,7 @@ class ThirdSocialLoginState extends State<ThirdSocialLoginPage> {
             height: screenUtil.setWidgetHeight(20),
           ) ,onTap: (){
             Navigator.pushAndRemoveUntil(context,
-                new CustomRouteZoom(new LoginPage()), (route) => route == null
+                new CustomRouteSlide(new LoginPage()), (route) => route == null
             );
           },),
         )
