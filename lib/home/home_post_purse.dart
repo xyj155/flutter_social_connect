@@ -39,7 +39,7 @@ class _HomePostPurseState extends State<HomePostPurse> with AutomaticKeepAliveCl
   void initState() {
     // TODO: implement initState
     super.initState();
-    getPurseDataList();
+//    getPurseDataList();
   }
 
   @override
@@ -109,15 +109,9 @@ class _HomePostPurseState extends State<HomePostPurse> with AutomaticKeepAliveCl
         controller.setNetworkDataSource(o.pictures[0]);
       }
     });
-//    Widget _buildItem(BuildContext context, int index) {
-//      return AspectRatio(
-//        child: VideoItem(list[index]),
-//        aspectRatio: 1280 / 500,
-//      );
-//    }
+
   }
 
-  // ignore: missing_return
   setUserPostList(UserPostItemData index) {
     return new GestureDetector(
       child: new Container(

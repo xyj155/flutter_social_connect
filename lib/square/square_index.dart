@@ -6,7 +6,9 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:like_this/api/Api.dart';
 import 'package:like_this/util/HttpUtil.dart';
 import 'package:like_this/gson/user_item_entity.dart';
+import 'package:like_this/gson/square_banner_entity.dart';
 import 'package:like_this/util/ScreenUtils.dart';
+import 'package:like_this/util/ToastUtil.dart';
 
 class SquarePageIndex extends StatefulWidget {
   @override
@@ -19,7 +21,7 @@ class SquarePageIndex extends StatefulWidget {
 class SquarePageState extends State<SquarePageIndex>
     with AutomaticKeepAliveClientMixin {
   ScreenUtils screenUtils = new ScreenUtils();
-  List<UserItemData> _items;
+  List<UserItemData> _user_purse_items;
 
   @override
   Widget build(BuildContext context) {
@@ -56,18 +58,26 @@ class SquarePageState extends State<SquarePageIndex>
         ),
         new Container(
           alignment: Alignment.centerLeft,
-          padding: EdgeInsets.only(left: screenUtils.setWidgetHeight(18),top: screenUtils.setWidgetHeight(8)),
-          child:  new Row(children: <Widget>[
-            new Text(
-              "推荐用户",
-              style: new TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: screenUtils.setFontSize(17),
-                  decoration: TextDecoration.none),
-            ),
-            new Image.asset("assert/imgs/person_arrow_downx.png",width: screenUtils.setWidgetWidth(25),height: screenUtils.setWidgetHeight(15),)
-          ],),
+          padding: EdgeInsets.only(
+              left: screenUtils.setWidgetHeight(18),
+              top: screenUtils.setWidgetHeight(8)),
+          child: new Row(
+            children: <Widget>[
+              new Text(
+                "推荐用户",
+                style: new TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: screenUtils.setFontSize(17),
+                    decoration: TextDecoration.none),
+              ),
+              new Image.asset(
+                "assert/imgs/person_arrow_downx.png",
+                width: screenUtils.setWidgetWidth(25),
+                height: screenUtils.setWidgetHeight(15),
+              )
+            ],
+          ),
         ),
         new Container(
           padding: EdgeInsets.only(
@@ -75,10 +85,10 @@ class SquarePageState extends State<SquarePageIndex>
               right: screenUtils.setWidgetWidth(10),
               left: screenUtils.setWidgetWidth(10)),
           height: screenUtils.setWidgetHeight(110),
-          child: _items == null
+          child: _user_purse_items == null
               ? new CupertinoActivityIndicator()
               : new ListView.builder(
-                  itemCount: _items.length,
+                  itemCount: _user_purse_items.length,
                   itemBuilder: (BuildContext context, int position) {
                     print("===================================" +
                         String.fromCharCode(position));
@@ -99,26 +109,35 @@ class SquarePageState extends State<SquarePageIndex>
                 activeColor: Color(0xffffffff),
               )),
               itemBuilder: _swiperBuilder,
-              itemCount: 3,
+              itemCount: _banner_list.length,
               scrollDirection: Axis.horizontal,
               autoplay: true,
               onTap: (index) => print('点击了第$index个'),
             )),
-       new Container(
-         alignment: Alignment.centerLeft,
-         padding: EdgeInsets.only(left: screenUtils.setWidgetHeight(18),top: screenUtils.setWidgetHeight(8),bottom: screenUtils.setWidgetHeight(8)),
-         child:  new Row(children: <Widget>[
-           new Text(
-             "精彩生活",
-             style: new TextStyle(
-                 color: Colors.black,
-                 fontWeight: FontWeight.bold,
-                 fontSize: screenUtils.setFontSize(17),
-                 decoration: TextDecoration.none),
-           ),
-           new Image.asset("assert/imgs/person_arrow_downx.png",width: screenUtils.setWidgetWidth(25),height: screenUtils.setWidgetHeight(15),)
-         ],),
-       ),
+        new Container(
+          alignment: Alignment.centerLeft,
+          padding: EdgeInsets.only(
+              left: screenUtils.setWidgetHeight(18),
+              top: screenUtils.setWidgetHeight(8),
+              bottom: screenUtils.setWidgetHeight(8)),
+          child: new Row(
+            children: <Widget>[
+              new Text(
+                "精彩生活",
+                style: new TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: screenUtils.setFontSize(17),
+                    decoration: TextDecoration.none),
+              ),
+              new Image.asset(
+                "assert/imgs/person_arrow_downx.png",
+                width: screenUtils.setWidgetWidth(25),
+                height: screenUtils.setWidgetHeight(15),
+              )
+            ],
+          ),
+        ),
         new SingleChildScrollView(
             //true 滑动到底部
             reverse: false,
@@ -170,20 +189,28 @@ class SquarePageState extends State<SquarePageIndex>
             )),
         new Container(
           alignment: Alignment.centerLeft,
-          padding: EdgeInsets.only(left: screenUtils.setWidgetHeight(18),top: screenUtils.setWidgetHeight(8),bottom: screenUtils.setWidgetHeight(8)),
-          child:  new Row(children: <Widget>[
-            new Text(
-              "热点讯息",
-              style: new TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: screenUtils.setFontSize(17),
-                  decoration: TextDecoration.none),
-            ),
-            new Image.asset("assert/imgs/person_arrow_downx.png",width: screenUtils.setWidgetWidth(25),height: screenUtils.setWidgetHeight(15),)
-          ],),
+          padding: EdgeInsets.only(
+              left: screenUtils.setWidgetHeight(18),
+              top: screenUtils.setWidgetHeight(8),
+              bottom: screenUtils.setWidgetHeight(8)),
+          child: new Row(
+            children: <Widget>[
+              new Text(
+                "热点讯息",
+                style: new TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: screenUtils.setFontSize(17),
+                    decoration: TextDecoration.none),
+              ),
+              new Image.asset(
+                "assert/imgs/person_arrow_downx.png",
+                width: screenUtils.setWidgetWidth(25),
+                height: screenUtils.setWidgetHeight(15),
+              )
+            ],
+          ),
         ),
-
       ],
     );
   }
@@ -191,7 +218,7 @@ class SquarePageState extends State<SquarePageIndex>
   @override
   void initState() {
     super.initState();
-
+    getBanner();
     getPurseUserList();
   }
 
@@ -201,17 +228,44 @@ class SquarePageState extends State<SquarePageIndex>
     setState(() {
       UserItemEntity code = UserItemEntity.fromJson(body);
       if (body != null) {
-        _items = code.data;
-        print("===================================");
-        print(_items.length);
-        print("===================================");
+        _user_purse_items = code.data;
       }
     });
   }
 
+  List<SquareBannerData> _banner_list = new List();
+
+  getBanner() async {
+    var response = await HttpUtil().get(Api.SQUARE_BANNER);
+    final body = json.decode(response);
+    var squareBannerEntity = SquareBannerEntity.fromJson(body);
+    print(body);
+    if (squareBannerEntity.code == 200) {
+      if (body != null) {
+        _banner_list = squareBannerEntity.data;
+      } else {
+        ToastUtil.showErrorToast("请求出错");
+      }
+    }
+  }
+
+  //轮播图
+  Widget _swiperBuilder(BuildContext context, int index) {
+    print("===================================");
+    print(_banner_list[index].bannerPicture);
+    print("===================================");
+    return (new ClipRRect(
+      borderRadius: BorderRadius.circular(10),
+      child: Image.network(
+        _banner_list[index].bannerPicture,
+        fit: BoxFit.fill,
+      ),
+    ));
+  }
+
 //关注用户头像
   Widget homeTitleItemView(BuildContext context, int index) {
-    UserItemData model = this._items[index];
+    UserItemData model = this._user_purse_items[index];
     return new Container(
       child: new GestureDetector(
         child: new Column(
@@ -252,17 +306,6 @@ class SquarePageState extends State<SquarePageIndex>
       ),
       margin: EdgeInsets.all(10),
     );
-  }
-
-//轮播图
-  Widget _swiperBuilder(BuildContext context, int index) {
-    return (new ClipRRect(
-      borderRadius: BorderRadius.circular(10),
-      child: Image.network(
-        "https://img.zcool.cn/community/01dafe5d679843a80120526d223462.jpg@1280w_1l_2o_100sh.jpg",
-        fit: BoxFit.fill,
-      ),
-    ));
   }
 
   @override

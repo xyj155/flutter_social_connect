@@ -113,6 +113,7 @@ class HomePageIndex extends State<HomePage> with AutomaticKeepAliveClientMixin {
 
   getTitleAvatarData() async {
     var response = await HttpUtil().get(Api.HOME_TITLE_AVATAR);
+    print('========================='+response);
     final body = json.decode(response.toString());
     var code = HomeTitleAvatarEntity.fromJson(body);
     if (body != null)

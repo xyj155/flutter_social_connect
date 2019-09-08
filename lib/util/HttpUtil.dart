@@ -4,6 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:like_this/api/Api.dart';
 
+import 'AppEncryptionUtil.dart';
+
 class HttpUtil {
   static HttpUtil instance;
   Dio dio;
@@ -33,16 +35,11 @@ class HttpUtil {
         //do something
         "version": "1.0.0"
       },
-      //请求的Content-Type，默认值是[ContentType.json]. 也可以用ContentType.parse("application/x-www-form-urlencoded")
       contentType: ContentType.json,
-      //表示期望以那种格式(方式)接受响应数据。接受四种类型 `json`, `stream`, `plain`, `bytes`. 默认值是 `json`,
-      responseType: ResponseType.plain,
+      responseType: ResponseType.json,
     );
 
     dio = Dio(options);
-
-//    //Cookie管理
-//    dio.interceptors.add(CookieManager(CookieJar()));
 
     //添加拦截器
     dio.interceptors
@@ -64,16 +61,26 @@ class HttpUtil {
   /*
    * get请求
    */
-  get(url, {data, options, cancelToken}) async {
+  get(url, {Map data, options, cancelToken}) async {
     Response response;
     try {
+      Map<String, dynamic> map = new Map();
+      map.putIfAbsent("token", () => AppEncryptionUtil.currentTimeMillis());
+      map.putIfAbsent(
+          "isMobile", () => AppEncryptionUtil.verifyTokenEncode("true"));
+      if (data != null) {
+        map.addAll(data);
+      }
+      print(map.toString());
+
+      print("map==========" + map.toString());
       response = await dio.get(url,
-          queryParameters: data, options: options, cancelToken: cancelToken);
+          queryParameters: map, options: options, cancelToken: cancelToken);
     } on DioError catch (e) {
       print('get error---------$e');
       formatError(e);
     }
-    return response;
+    return response.toString();
   }
 
   /*
@@ -82,8 +89,13 @@ class HttpUtil {
   post(url, {data, options, cancelToken}) async {
     Response response;
     try {
+      Map<String, dynamic> map = new Map();
+      map.putIfAbsent("token", () => AppEncryptionUtil.currentTimeMillis());
+      map.putIfAbsent(
+          "isMobile", () => AppEncryptionUtil.verifyTokenEncode("true"));
+      map.addAll(data);
       response = await dio.post(url,
-          queryParameters: data, options: options, cancelToken: cancelToken);
+          queryParameters: map, options: options, cancelToken: cancelToken);
     } on DioError catch (e) {
       print('post error---------$e');
       formatError(e);
@@ -99,9 +111,9 @@ class HttpUtil {
     try {
       response = await dio.download(urlPath, savePath,
           onReceiveProgress: (int count, int total) {
-            //进度
-            print("$count $total");
-          });
+        //进度
+        print("$count $total");
+      });
       print('downloadFile success---------${response.data}');
     } on DioError catch (e) {
       print('downloadFile error---------$e');
@@ -145,4 +157,3 @@ class HttpUtil {
     token.cancel("cancelled");
   }
 }
-
