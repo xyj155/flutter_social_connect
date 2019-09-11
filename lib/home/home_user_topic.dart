@@ -28,9 +28,9 @@ class HomeTopicPage extends State<StatefulWidget> {
     try {
       var response = await HttpUtil().get(Api.USER_TOPIC_LIST);
       Map userMap = json.decode(response.toString());
+      print("================================-----------");
+      print(response.toString());
       var naviEntity = HomeUserTopicEntity.fromJson(userMap);
-
-      /// 初始化
       setState(() {
         _datas = naviEntity.data;
         index = 0;
@@ -124,14 +124,18 @@ class HomeTopicPage extends State<StatefulWidget> {
               child: FadeInImage.assetNetwork(
                 placeholder: "assert/imgs/loading.gif",
                 image: articles[index].topicPicUrl,
-                fit: BoxFit.cover
-                ,width: 64,height: 64,
+                fit: BoxFit.cover,
+                width: 64,
+                height: 64,
               ),
             ),
 //            new Image.network(articles[index].topicPicUrl,width: 55,height: 55,),
-            new Text(articles[index].topicName,
-                style: new TextStyle(color: Colors.black),maxLines: 1,
-              overflow: TextOverflow.ellipsis,)
+            new Text(
+              articles[index].topicName,
+              style: new TextStyle(color: Colors.black),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            )
           ],
         );
       },

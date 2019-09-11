@@ -33,7 +33,8 @@ class HttpUtil {
       //Http请求头.
       headers: {
         //do something
-        "version": "1.0.0"
+        "token":  AppEncryptionUtil.currentTimeMillis(),
+        "isMobile": AppEncryptionUtil.verifyTokenEncode("true")
       },
       contentType: ContentType.json,
       responseType: ResponseType.json,
@@ -61,21 +62,11 @@ class HttpUtil {
   /*
    * get请求
    */
-  get(url, {Map data, options, cancelToken}) async {
+  get(url, { data, options, cancelToken}) async {
     Response response;
     try {
-      Map<String, dynamic> map = new Map();
-      map.putIfAbsent("token", () => AppEncryptionUtil.currentTimeMillis());
-      map.putIfAbsent(
-          "isMobile", () => AppEncryptionUtil.verifyTokenEncode("true"));
-      if (data != null) {
-        map.addAll(data);
-      }
-      print(map.toString());
-
-      print("map==========" + map.toString());
       response = await dio.get(url,
-          queryParameters: map, options: options, cancelToken: cancelToken);
+          queryParameters: data, options: options, cancelToken: cancelToken);
     } on DioError catch (e) {
       print('get error---------$e');
       formatError(e);
@@ -86,16 +77,11 @@ class HttpUtil {
   /*
    * post请求
    */
-  post(url, {data, options, cancelToken}) async {
+  post(url, { data, options, cancelToken}) async {
     Response response;
     try {
-      Map<String, dynamic> map = new Map();
-      map.putIfAbsent("token", () => AppEncryptionUtil.currentTimeMillis());
-      map.putIfAbsent(
-          "isMobile", () => AppEncryptionUtil.verifyTokenEncode("true"));
-      map.addAll(data);
       response = await dio.post(url,
-          queryParameters: map, options: options, cancelToken: cancelToken);
+          queryParameters: data, options: options, cancelToken: cancelToken);
     } on DioError catch (e) {
       print('post error---------$e');
       formatError(e);
@@ -156,4 +142,7 @@ class HttpUtil {
   void cancelRequests(CancelToken token) {
     token.cancel("cancelled");
   }
+
+
+
 }

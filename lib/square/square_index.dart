@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:like_this/api/Api.dart';
+import 'package:like_this/square/square_little_shop.dart';
 import 'package:like_this/util/HttpUtil.dart';
 import 'package:like_this/gson/user_item_entity.dart';
 import 'package:like_this/gson/square_banner_entity.dart';
@@ -30,6 +31,7 @@ class SquarePageState extends State<SquarePageIndex>
     return new Column(
       children: <Widget>[
         new Container(
+          color: Colors.white,
           child: new ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Container(
@@ -47,7 +49,7 @@ class SquarePageState extends State<SquarePageIndex>
                   new Text(
                     "    搜索你想的帖子",
                     style: new TextStyle(
-                      color: Color(0xffbfbfbf),
+                      color: Color(0xffdbdbdb),
                     ),
                   ),
                 ],
@@ -55,29 +57,6 @@ class SquarePageState extends State<SquarePageIndex>
             ),
           ),
           margin: EdgeInsets.only(top: screenUtils.setWidgetHeight(17)),
-        ),
-        new Container(
-          alignment: Alignment.centerLeft,
-          padding: EdgeInsets.only(
-              left: screenUtils.setWidgetHeight(18),
-              top: screenUtils.setWidgetHeight(8)),
-          child: new Row(
-            children: <Widget>[
-              new Text(
-                "推荐用户",
-                style: new TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: screenUtils.setFontSize(17),
-                    decoration: TextDecoration.none),
-              ),
-              new Image.asset(
-                "assert/imgs/person_arrow_downx.png",
-                width: screenUtils.setWidgetWidth(25),
-                height: screenUtils.setWidgetHeight(15),
-              )
-            ],
-          ),
         ),
         new Container(
           padding: EdgeInsets.only(
@@ -120,22 +99,13 @@ class SquarePageState extends State<SquarePageIndex>
               left: screenUtils.setWidgetHeight(18),
               top: screenUtils.setWidgetHeight(8),
               bottom: screenUtils.setWidgetHeight(8)),
-          child: new Row(
-            children: <Widget>[
-              new Text(
-                "精彩生活",
-                style: new TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: screenUtils.setFontSize(17),
-                    decoration: TextDecoration.none),
-              ),
-              new Image.asset(
-                "assert/imgs/person_arrow_downx.png",
-                width: screenUtils.setWidgetWidth(25),
-                height: screenUtils.setWidgetHeight(15),
-              )
-            ],
+          child: new Text(
+            "精彩生活",
+            style: new TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: screenUtils.setFontSize(17),
+                decoration: TextDecoration.none),
           ),
         ),
         new SingleChildScrollView(
@@ -175,14 +145,22 @@ class SquarePageState extends State<SquarePageIndex>
                       height: screenUtils.setWidgetHeight(87),
                     ),
                   ),
-                  new Container(
-                    width: screenUtils.setWidgetWidth(155),
-                    height: screenUtils.setWidgetHeight(87),
-                    child: new Image.asset(
-                      "assert/imgs/school_shop.png",
+                  new GestureDetector(
+                    child: new Container(
                       width: screenUtils.setWidgetWidth(155),
                       height: screenUtils.setWidgetHeight(87),
+                      child: new Image.asset(
+                        "assert/imgs/school_shop.png",
+                        width: screenUtils.setWidgetWidth(155),
+                        height: screenUtils.setWidgetHeight(87),
+                      ),
                     ),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          new MaterialPageRoute(
+                              builder: (context) => new LittleShopPage()));
+                    },
                   ),
                 ],
               ),
@@ -193,24 +171,16 @@ class SquarePageState extends State<SquarePageIndex>
               left: screenUtils.setWidgetHeight(18),
               top: screenUtils.setWidgetHeight(8),
               bottom: screenUtils.setWidgetHeight(8)),
-          child: new Row(
-            children: <Widget>[
-              new Text(
-                "热点讯息",
-                style: new TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: screenUtils.setFontSize(17),
-                    decoration: TextDecoration.none),
-              ),
-              new Image.asset(
-                "assert/imgs/person_arrow_downx.png",
-                width: screenUtils.setWidgetWidth(25),
-                height: screenUtils.setWidgetHeight(15),
-              )
-            ],
+          child: new Text(
+            "附近店家",
+            style: new TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: screenUtils.setFontSize(17),
+                decoration: TextDecoration.none),
           ),
         ),
+      
       ],
     );
   }
@@ -225,6 +195,9 @@ class SquarePageState extends State<SquarePageIndex>
   getPurseUserList() async {
     var response = await HttpUtil().get(Api.SQUARE_PURSE_USER);
     final body = json.decode(response.toString());
+    print("=====================");
+    print(response.toString());
+    print("=====================");
     setState(() {
       UserItemEntity code = UserItemEntity.fromJson(body);
       if (body != null) {

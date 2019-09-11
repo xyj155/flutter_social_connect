@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:like_this/common/common_webview_page.dart';
+import 'package:like_this/user/user_detail_center.dart';
+import 'package:like_this/user/user_setting.dart';
+import 'package:like_this/util/ScreenUtils.dart';
+import 'package:like_this/util/TransationUtil.dart';
+
+import 'user_game_list.dart';
 
 void main() {
   runApp(
@@ -12,15 +19,18 @@ void main() {
   );
 }
 
+ScreenUtils screenUtil = new ScreenUtils();
+
 class UserPageIndex extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new  Container(
+    screenUtil.initUtil(context);
+    return new Container(
       color: Colors.white,
       child: new Column(
         children: <Widget>[
           new Container(
-            padding: new EdgeInsets.only(top: 16, left: 20, bottom: 20),
+            padding: new EdgeInsets.only(top: screenUtil.setWidgetHeight(16), left: screenUtil.setWidgetWidth(20), bottom: screenUtil.setWidgetHeight(20)),
             child: new Text("我的",
                 style: TextStyle(
                     fontSize: 31,
@@ -28,47 +38,56 @@ class UserPageIndex extends StatelessWidget {
                     color: Colors.black)),
             alignment: Alignment.topLeft,
           ),
-          new Container(
+          new GestureDetector(
+            onTap: () {
+              Navigator.push(context, new MaterialPageRoute(builder: (_) {
+                return new UserDetailCenterPage();
+              }));
+            },
             child: new Container(
-                alignment: Alignment.centerLeft,
-                padding: EdgeInsets.only(left: 14, top: 8, bottom: 6, right: 15),
-                child: new Row(
-                  children: <Widget>[
-                    new ClipOval(
-                      child: Image.network("https://img.zcool.cn/community/011cff5c7e3893a801213f26f4fed1.jpg@2o.jpg",
-                        fit: BoxFit.fill,height: 72,width: 72,),
+              padding: new EdgeInsets.only(left: screenUtil.setWidgetWidth(20), bottom: screenUtil.setWidgetHeight(5), right:screenUtil.setWidgetWidth(20)),
+              child: new Row(
+                children: <Widget>[
+                  new ClipOval(
+                    child: Image.network(
+                      "https://img.zcool.cn/community/011cff5c7e3893a801213f26f4fed1.jpg@2o.jpg",
+                      fit: BoxFit.fill,
+                      height: screenUtil.setWidgetHeight(72),
+                      width: screenUtil.setWidgetWidth(72),
                     ),
-                    new Expanded(
-                        child: new Container(
-                          padding: EdgeInsets.only(left: 20),
-                          child: new Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                new Text(
-                                  "用户名",
-                                  style: new TextStyle(
-                                      fontSize: 27, fontWeight: FontWeight.bold),
-                                ),
-                                new Divider(
-                                  color: Colors.transparent,
-                                  height: 10,
-                                ),
-                                new Text(
-                                  "个性签名",
-                                  style: new TextStyle(
-                                      fontSize: 14, color: Color(0xff8a8a8a)),
-                                ),
-                              ]),
-                        )),
-                    new Image.asset(
-                      "assert/imgs/person_arrow_right_grayx.png",
-                      width: 15,
-                      height: 15,
-                    ),
-                  ],
-                )),
+                  ),
+                  new Expanded(
+                      child: new Container(
+                        padding: EdgeInsets.only(left: 20),
+                        child: new Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              new Text(
+                                "用户名",
+                                style: new TextStyle(
+                                    fontSize: 27, fontWeight: FontWeight.bold),
+                              ),
+                              new Divider(
+                                color: Colors.transparent,
+                                height: 10,
+                              ),
+                              new Text(
+                                "个性签名",
+                                style: new TextStyle(
+                                    fontSize: 14, color: Color(0xff8a8a8a)),
+                              ),
+                            ]),
+                      )),
+                  new Image.asset(
+                    "assert/imgs/person_arrow_right_grayx.png",
+                    width: 15,
+                    height: 15,
+                  ),
+                ],
+              ),
+            ),
           ),
-          new Divider(indent: 20, height: 16.0, color:  Colors.transparent),
+          new Divider(indent: 20, height: 16.0, color: Colors.transparent),
           new Row(
             children: <Widget>[
               new Expanded(
@@ -130,12 +149,18 @@ class UserPageIndex extends StatelessWidget {
               ),
             ],
           ),
-          new Container( height: 5.0, color: Color(0xfffafafa),margin: EdgeInsets.only(top: 16),),
+          new Container(
+            height: 5.0,
+            color: Color(0xfffafafa),
+            margin: EdgeInsets.only(top: 16),
+          ),
           new ListTile(
             title: new Text(
               "我的发帖",
               style: TextStyle(
-                  fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black),
             ),
             trailing: new Image.asset(
               "assert/imgs/person_arrow_right_grayx.png",
@@ -152,7 +177,9 @@ class UserPageIndex extends StatelessWidget {
             title: new Text(
               "我的收藏",
               style: TextStyle(
-                  fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black),
             ),
             trailing: new Image.asset(
               "assert/imgs/person_arrow_right_grayx.png",
@@ -169,7 +196,9 @@ class UserPageIndex extends StatelessWidget {
             title: new Text(
               "浏览历史",
               style: TextStyle(
-                  fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black),
             ),
             trailing: new Image.asset(
               "assert/imgs/person_arrow_right_grayx.png",
@@ -182,15 +211,23 @@ class UserPageIndex extends StatelessWidget {
               height: 20,
             ),
           ),
-          new Divider(
-              indent: 30,
-              height: 16.0,
-              color: Color.fromARGB(255, 216, 216, 216)),
+          new Container(
+              height: screenUtil.setWidgetHeight(10),
+              color: Color(0xfffafafa)),
           new ListTile(
+            onTap: () {
+              Navigator.push(context, new MaterialPageRoute(builder: (_) {
+                return new CommonWebViewPage(
+                    url:
+                    "http://sxystushop.xyz/JustLikeThis/public/luckdraw/default.html");
+              }));
+            },
             title: new Text(
               "抽奖",
               style: TextStyle(
-                  fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black),
             ),
             trailing: new Image.asset(
               "assert/imgs/person_arrow_right_grayx.png",
@@ -204,10 +241,17 @@ class UserPageIndex extends StatelessWidget {
             ),
           ),
           new ListTile(
+            onTap: (){
+              Navigator.push(context, new MaterialPageRoute(builder: (_){
+                return new UserGameListPage();
+              }));
+            },
             title: new Text(
               "玩游戏 送礼品",
               style: TextStyle(
-                  fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black),
             ),
             trailing: new Image.asset(
               "assert/imgs/person_arrow_right_grayx.png",
@@ -224,7 +268,9 @@ class UserPageIndex extends StatelessWidget {
             title: new Text(
               "邀请",
               style: TextStyle(
-                  fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black),
             ),
             trailing: new Image.asset(
               "assert/imgs/person_arrow_right_grayx.png",
@@ -237,15 +283,20 @@ class UserPageIndex extends StatelessWidget {
               height: 20,
             ),
           ),
-          new Divider(
-              indent: 30,
-              height: 16.0,
-              color: Color.fromARGB(255, 216, 216, 216)),
+          new Container(
+              height: screenUtil.setWidgetHeight(10),
+              color: Color(0xfffafafa)),
           new ListTile(
+            onTap: () {
+              Navigator.push(
+                  context, new CustomRouteSlide(new UserSettingPageIndex()));
+            },
             title: new Text(
               "设置",
               style: TextStyle(
-                  fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black),
             ),
             trailing: new Image.asset(
               "assert/imgs/person_arrow_right_grayx.png",
@@ -257,7 +308,10 @@ class UserPageIndex extends StatelessWidget {
               width: 20,
               height: 20,
             ),
-          )
+          ),
+          new Expanded(child: new Container(
+              height: screenUtil.setWidgetHeight(10),
+              color: Color(0xfffafafa))),
         ],
       ),
     );

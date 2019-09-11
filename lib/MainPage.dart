@@ -5,6 +5,9 @@ import 'package:like_this/widget/my_bottom_navigationbar.dart';
 import 'package:ripple_backdrop_animate_route/ripple_backdrop_animate_route.dart';
 import 'home/home_index.dart';
 import 'message/message_index.dart';
+import 'post/post_picture_page.dart';
+import 'post/post_text_page.dart';
+import 'post/post_video_page.dart';
 import 'square/square_index.dart';
 import 'user/user_index.dart';
 
@@ -190,35 +193,56 @@ class FloatingActionButtonDemo extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
-                      new Expanded(child: new Column(
-                        children: <Widget>[
-                          new Image.asset(
-                            "assert/imgs/ic_square_write.png",
-                            height: screenUtils.setWidgetHeight(80),
-                            width: screenUtils.setWidgetHeight(67),
-                          ),
-                          new Text("文字说说")
-                        ],
+                      new Expanded(child: new GestureDetector(
+                        onTap: (){
+                          Navigator.push(context, new MaterialPageRoute(builder: (_){
+                            return new TextPostPage();
+                          }));
+                        },
+                        child: new Column(
+                          children: <Widget>[
+                            new Image.asset(
+                              "assert/imgs/ic_square_write.png",
+                              height: screenUtils.setWidgetHeight(80),
+                              width: screenUtils.setWidgetHeight(67),
+                            ),
+                            new Text("文字说说")
+                          ],
+                        ),
                       )),
-                      new Expanded(child: new Column(
-                        children: <Widget>[
-                          new Image.asset(
-                            "assert/imgs/ic_square_picture.png",
-                            height: screenUtils.setWidgetHeight(80),
-                            width: screenUtils.setWidgetHeight(67),
-                          ),
-                          new Text("图片签到")
-                        ],
-                      )),
-                      new Expanded(child: new Column(
-                        children: <Widget>[
-                          new Image.asset(
-                            "assert/imgs/ic_square_video.png",
-                            height: screenUtils.setWidgetHeight(80),
-                            width: screenUtils.setWidgetHeight(67),
-                          ),
-                          new Text("视频帖子")
-                        ],
+                      new Expanded(child: new GestureDetector(
+                        onTap: (){
+                          Navigator.push(context, new MaterialPageRoute(builder: (_){
+                            return new PostPicturePage();
+                          }));
+                        },
+                        child: new Column(
+                          children: <Widget>[
+                            new Image.asset(
+                              "assert/imgs/ic_square_picture.png",
+                              height: screenUtils.setWidgetHeight(80),
+                              width: screenUtils.setWidgetHeight(67),
+                            ),
+                            new Text("图片签到")
+                          ],
+                        )),
+                      ),
+                      new Expanded(child: new GestureDetector(
+                        onTap: (){
+                          Navigator.push(context, new MaterialPageRoute(builder: (_){
+                            return new PostVideoPage();
+                          }));
+                        },
+                        child: new Column(
+                          children: <Widget>[
+                            new Image.asset(
+                              "assert/imgs/ic_square_video.png",
+                              height: screenUtils.setWidgetHeight(80),
+                              width: screenUtils.setWidgetHeight(67),
+                            ),
+                            new Text("视频帖子")
+                          ],
+                        ),
                       )),
                     ],
                   ),
@@ -227,7 +251,7 @@ class FloatingActionButtonDemo extends StatelessWidget {
               childFade: true,
               duration: 300,
               blurRadius: 20.0,
-              bottomHeight: 60.0,
+              bottomHeight: screenUtils.setWidgetHeight(120),
               bottomButtonRotate: true,
             ),
           ));

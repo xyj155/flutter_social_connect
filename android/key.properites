@@ -1,0 +1,4 @@
+storePassword=xuyijie
+keyPassword=xuyijie
+keyAlias=sign
+storeFile=key/sign.jks

@@ -47,9 +47,13 @@ dependencies:
   fluwx: ^1.0.4
   jmessage_flutter: ^0.2.0
   jpush_flutter: ^0.0.8
+  tobias: ^1.1.0+1
   flutter_marquee:
     git: https://github.com/LiuC520/flutter_marquee.git
   ripple_backdrop_animate_route: ^0.1.2
+  flutter_webview_plugin: ^0.2.1+2
+  image_picker: ^0.5.0+3
+  flutter_luban: ^0.1.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -72,6 +76,7 @@ flutter:
     - assert/imgs/manx.png
     - assert/imgs/womanx.png
     - assert/flare/Space.flr
+    - assert/imgs/ic_shopcar.png
     - assert/json/country_code_json.json
     - assert/imgs/square_news.png
     - assert/imgs/tabbar_project_selected.png
@@ -106,8 +111,6 @@ flutter:
     - assert/imgs/ic_photo.png
     - assert/imgs/tabbar_person_selected.png
     - assert/imgs/center_circle.png
-    - assert/imgs/ic_main_tab_msg.png
-    - assert/imgs/ic_main_tab_msg_pressed.png
     - assert/imgs/ic_user_collection.png
     - assert/imgs/ic_user_invite.png
     - assert/imgs/ic_user_post_collection.png

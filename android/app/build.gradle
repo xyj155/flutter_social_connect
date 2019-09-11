@@ -30,7 +30,14 @@ android {
     lintOptions {
         disable 'InvalidPackage'
     }
-
+    signingConfigs {
+        release {
+            keyAlias 'sign'
+            keyPassword 'xuyijie'
+            storeFile file('key/sign.jks')
+            storePassword 'xuyijie'
+        }
+    }
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "fasechar.com.flutter_app"
@@ -39,7 +46,7 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
+        multiDexEnabled true
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -59,7 +66,7 @@ android {
             }
         }
         release {
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             ndk {
                 abiFilters "armeabi-v7a"
             }
@@ -73,6 +80,8 @@ flutter {
 
 dependencies {
     testImplementation 'junit:junit:4.12'
+    implementation 'com.quicklib:quicklib-multidex:1.0.1'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    implementation files('lib/MiPush_SDK_Client_3_6_19.jar')
 }

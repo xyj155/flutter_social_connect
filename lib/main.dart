@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'MainPage.dart';
@@ -5,10 +6,12 @@ import 'login/login.dart';
 import 'package:platform/platform.dart';
 import 'package:jmessage_flutter/jmessage_flutter.dart';
 import 'package:jpush_flutter/jpush_flutter.dart';
+import 'login/user_register_information.dart';
 import 'login/user_register_owner_information.dart';
 
 MethodChannel channel = MethodChannel('jmessage_flutter');
-JmessageFlutter jmessage = new JmessageFlutter.private(channel, const LocalPlatform());
+JmessageFlutter jmessage =
+    new JmessageFlutter.private(channel, const LocalPlatform());
 
 void main() => runApp(new MyApp());
 
@@ -17,6 +20,8 @@ void JMessageLogin() async {
   JMUserInfo u = await jmessage.getMyInfo();
   print(u.nickname + "==============");
 }
+
+
 
 JPush jPush = new JPush();
 
@@ -43,7 +48,7 @@ class MyApp extends StatelessWidget {
       color: Colors.white,
       child: new MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: MainPage(), //启动MainPage
+        home: UserAvatarRegisterPage(), //启动MainPage
       ),
     );
 //    return ;

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:like_this/util/CommonBack.dart';
-class UserGameListPage extends StatefulWidget {
+class UserDetailCenterPage extends StatefulWidget {
   @override
-  _UserGameListPageState createState() => _UserGameListPageState();
+  _UserDetailCenterPageState createState() => _UserDetailCenterPageState();
 }
 
-class _UserGameListPageState extends State<UserGameListPage> with SingleTickerProviderStateMixin {
+class _UserDetailCenterPageState extends State<UserDetailCenterPage> with SingleTickerProviderStateMixin {
   AnimationController _controller;
 
   @override
@@ -23,9 +23,7 @@ class _UserGameListPageState extends State<UserGameListPage> with SingleTickerPr
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BackUtil.NavigationBack(context, "玩游戏"),
-      body: new ListView.builder(
-          itemBuilder: null),
+      appBar: BackUtil.NavigationBack(context, "个人信息"),
     );
   }
 }
